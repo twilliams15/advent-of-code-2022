@@ -8,33 +8,35 @@ fs.readFile("./01-input.txt", "utf8", (err, data) => {
 
   const calorieList = data.split("\n");
 
-  // ---
+  // --- helpers ---
 
   const toNumber = (s) => +s;
-  const sumWhileNotZero = (arr) => {
+  const toSum = (a, c) => (a += c);
+  const desc = (a, b) => b - a;
+  const splitOnEmpty = (arr) => {
     const result = [];
-    let buffer = 0;
+    let buffer = [];
     arr.forEach((val) => {
       if (val) {
-        buffer += val;
+        buffer.push(val);
       } else {
         result.push(buffer);
-        buffer = 0;
+        buffer = [];
       }
     });
     return result;
   };
 
-  const result = sumWhileNotZero(calorieList.map(toNumber));
+  // ---
+
+  const calorieListByElf = splitOnEmpty(calorieList);
+  const result = calorieListByElf.map((cals) =>
+    cals.map(toNumber).reduce(toSum)
+  );
 
   // part i
   console.log(Math.max(...result));
 
   // part ii
-  console.log(
-    result
-      .sort((a, b) => b - a)
-      .slice(0, 3)
-      .reduce((a, c) => (a += c))
-  );
+  console.log(result.sort(desc).slice(0, 3).reduce(toSum));
 });
