@@ -11,31 +11,20 @@ fs.readFile("./01-input.txt", "utf8", (err, data) => {
   const toNumber = (s) => +s;
   const toSum = (a, c) => (a += c);
   const desc = (a, b) => b - a;
-  const splitArray = (splitOn) => (arr) => {
-    const result = [];
-    let buffer = [];
-    arr.forEach((val) => {
-      if (val !== splitOn) {
-        buffer.push(val);
-      } else {
-        result.push(buffer);
-        buffer = [];
-      }
-    });
-    return result;
-  };
-  const splitOnEmpty = splitArray("");
 
   // ---
 
-  const calorieListByElf = splitOnEmpty(data.split("\n"));
-  const result = calorieListByElf.map((cals) =>
-    cals.map(toNumber).reduce(toSum)
-  );
+  const result = data
+    .split("\n")
+    .join(",")
+    .split(",,")
+    .map((x) => x.split(","))
+    .map((x) => x.map(toNumber).reduce(toSum))
+    .sort(desc);
 
   // part i
-  console.log(Math.max(...result));
+  console.log(result[0]);
 
   // part ii
-  console.log(result.sort(desc).slice(0, 3).reduce(toSum));
+  console.log(result.slice(0, 3).reduce(toSum));
 });
