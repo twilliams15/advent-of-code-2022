@@ -1,0 +1,23 @@
+{
+  "name": "aoc2022",
+  "version": "1.0.0",
+  "description": "",
+  "main": "01-lodash.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twilliams15/advent-of-code-2022.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/twilliams15/advent-of-code-2022/issues"
+  },
+  "homepage": "https://github.com/twilliams15/advent-of-code-2022#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
