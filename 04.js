@@ -6,14 +6,6 @@ fs.readFile("./04-input.txt", "utf8", (err, data) => {
     return;
   }
 
-  // --- helpers ---
-
-  function* window(inputArray, size) {
-    for (let index = 0; index + size <= inputArray.length; index++) {
-      yield inputArray.slice(index, index + size);
-    }
-  }
-
   // part i
   console.log(
     data
