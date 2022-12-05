@@ -18,13 +18,13 @@ fs.readFile("./01-input.txt", "utf8", (err, data) => {
 
   const foodPerElf = split("\n\n")(data);
   const calsPerElf = pipe(
-    map((x) => pipe(splitOnNewline, map(Number), reduceToSum)(x)((x) => x)),
+    map((x) => pipe(splitOnNewline, map(Number), reduceToSum)(x)),
     sortDesc
   )(foodPerElf);
 
   // part i
-  take(1)(calsPerElf)(console.log);
+  console.log(take(1)(calsPerElf));
 
   // part ii
-  pipe(take(3), reduceToSum)(calsPerElf)(console.log);
+  console.log(pipe(take(3), reduceToSum)(calsPerElf));
 });
