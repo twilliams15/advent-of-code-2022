@@ -10,3 +10,4 @@ export const reduce = (reducer) => (source) => (cb) =>
 
 export const sortDesc = sort((a, b) => b - a);
 export const reduceToSum = reduce((a, c) => (a += c));
+export const splitOnNewline = split("\n");

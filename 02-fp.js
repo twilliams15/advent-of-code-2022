@@ -1,7 +1,7 @@
 import fs from "fs";
 import pipe from "lodash/fp/pipe.js";
 
-import { map, reduceToSum, split } from "./utils.js";
+import { map, reduceToSum, split, splitOnNewline } from "./utils.js";
 
 fs.readFile("./02-input.txt", "utf8", (err, data) => {
   if (err) {
@@ -23,7 +23,7 @@ fs.readFile("./02-input.txt", "utf8", (err, data) => {
   };
 
   pipe(
-    split("\n"),
+    splitOnNewline,
     map((x) => legend[x]),
     reduceToSum
   )(data)(console.log);
@@ -42,7 +42,7 @@ fs.readFile("./02-input.txt", "utf8", (err, data) => {
   };
 
   pipe(
-    split("\n"),
+    splitOnNewline,
     map((x) => legend2[x]),
     reduceToSum
   )(data)(console.log);
