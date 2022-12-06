@@ -1,10 +1,5 @@
 import fs from "fs";
-import filter from "lodash/fp/filter.js";
-import join from "lodash/fp/join.js";
-import head from "lodash/fp/head.js";
-import map from "lodash/fp/map.js";
-import pipe from "lodash/fp/pipe.js";
-import { slidingWindow } from "./utils.js";
+import { getFirstUniqueSet, slidingWindow } from "./utils.js";
 
 fs.readFile("./06-input.txt", "utf8", (err, data) => {
   if (err) {
@@ -12,21 +7,13 @@ fs.readFile("./06-input.txt", "utf8", (err, data) => {
     return;
   }
 
-  const getConsecutiveUniques = (length) => (data) => {
-    const firstUniqueSet = pipe(
-      map((x) => new Set(x)),
-      filter((x) => x.size === length),
-      head
-    );
-
-    return join("")([...firstUniqueSet(slidingWindow(length)(data))]);
-  };
-
   // part i
-  const uniqueFour = getConsecutiveUniques(4);
-  console.log(data.indexOf(uniqueFour(data)) + 4);
+  const possibleMarkers1 = slidingWindow(4)(data);
+  const startMarker1 = [...getFirstUniqueSet(4)(possibleMarkers1)].join("");
+  console.log(data.indexOf(startMarker1) + 4);
 
   // part ii
-  const uniqueFourteen = getConsecutiveUniques(14);
-  console.log(data.indexOf(uniqueFourteen(data)) + 14);
+  const possibleMarkers2 = slidingWindow(14)(data);
+  const startMarker2 = [...getFirstUniqueSet(14)(possibleMarkers2)].join("");
+  console.log(data.indexOf(startMarker2) + 14);
 });
