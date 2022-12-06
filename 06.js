@@ -11,12 +11,11 @@ fs.readFile("./06-input.txt", "utf8", (err, data) => {
     return;
   }
 
-  // part i
-  function getStartMarker(markerLength) {
+  const getConsecutiveUniques = (uniqueLength) => (data) => {
     const codes = [];
-    for (let i = 0; i < data.length - markerLength - 1; i++) {
+    for (let i = 0; i < data.length - uniqueLength - 1; i++) {
       let result = "";
-      for (let j = 0; j < markerLength; j++) {
+      for (let j = 0; j < uniqueLength; j++) {
         result += data[i + j];
       }
       codes.push(result);
@@ -24,18 +23,20 @@ fs.readFile("./06-input.txt", "utf8", (err, data) => {
 
     const firstSet = pipe(
       map((x) => new Set(x)),
-      filter((x) => x.size === markerLength),
+      filter((x) => x.size === uniqueLength),
       head
     );
 
     const startMarker = join("")([...firstSet(codes)]);
 
     return startMarker;
-  }
+  };
 
   // part i
-  console.log(data.indexOf(getStartMarker(4)) + 4);
+  const uniqueFour = getConsecutiveUniques(4)(data);
+  console.log(data.indexOf(uniqueFour) + 4);
 
   // part ii
-  console.log(data.indexOf(getStartMarker(14)) + 14);
+  const uniqueFourteen = getConsecutiveUniques(14)(data);
+  console.log(data.indexOf(uniqueFourteen) + 14);
 });
