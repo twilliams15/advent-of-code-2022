@@ -4,6 +4,7 @@ import join from "lodash/fp/join.js";
 import head from "lodash/fp/head.js";
 import map from "lodash/fp/map.js";
 import pipe from "lodash/fp/pipe.js";
+import { slidingWindow } from "./utils.js";
 
 fs.readFile("./06-input.txt", "utf8", (err, data) => {
   if (err) {
@@ -11,25 +12,14 @@ fs.readFile("./06-input.txt", "utf8", (err, data) => {
     return;
   }
 
-  const getConsecutiveUniques = (uniqueLength) => (data) => {
-    const codes = [];
-    for (let i = 0; i < data.length - uniqueLength - 1; i++) {
-      let result = "";
-      for (let j = 0; j < uniqueLength; j++) {
-        result += data[i + j];
-      }
-      codes.push(result);
-    }
-
-    const firstSet = pipe(
+  const getConsecutiveUniques = (length) => (data) => {
+    const firstUniqueSet = pipe(
       map((x) => new Set(x)),
-      filter((x) => x.size === uniqueLength),
+      filter((x) => x.size === length),
       head
     );
 
-    const startMarker = join("")([...firstSet(codes)]);
-
-    return startMarker;
+    return join("")([...firstUniqueSet(slidingWindow(length)(data))]);
   };
 
   // part i
