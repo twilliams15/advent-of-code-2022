@@ -33,10 +33,10 @@ fs.readFile("./06-input.txt", "utf8", (err, data) => {
   };
 
   // part i
-  const uniqueFour = getConsecutiveUniques(4)(data);
-  console.log(data.indexOf(uniqueFour) + 4);
+  const uniqueFour = getConsecutiveUniques(4);
+  console.log(data.indexOf(uniqueFour(data)) + 4);
 
   // part ii
-  const uniqueFourteen = getConsecutiveUniques(14)(data);
-  console.log(data.indexOf(uniqueFourteen) + 14);
+  const uniqueFourteen = getConsecutiveUniques(14);
+  console.log(data.indexOf(uniqueFourteen(data)) + 14);
 });
