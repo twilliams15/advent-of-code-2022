@@ -1,5 +1,4 @@
 import fs from "fs";
-import { buffer } from "stream/consumers";
 
 fs.readFile("./11-input.txt", "utf8", (err, data) => {
   if (err) {
